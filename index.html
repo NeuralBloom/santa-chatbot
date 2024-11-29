@@ -193,7 +193,7 @@
         function selectSanta(type) {
             currentSanta = type;
             document.getElementById('niceButton').classList.toggle('active', type === 'nice');
-            document.getElementById('snarkyButton').classList.toggle('active', type === 'snarky');
+            document.getElementById('naughtyButton').classList.toggle('active', type === 'naughty');
             
             // Add Santa's new greeting
             const greeting = type === 'nice' 
@@ -213,8 +213,8 @@
 
         function getSantaResponse(userMessage) {
             const lowercaseMessage = userMessage.toLowerCase();
-            const responses = currentSanta === 'nice' ? niceSantaResponses : snarkySantaResponses;
-            const defaultResponses = currentSanta === 'nice' ? niceDefaultResponses : snarkyDefaultResponses;
+            const responses = currentSanta === 'nice' ? niceSantaResponses : naughtySantaResponses;
+            const defaultResponses = currentSanta === 'nice' ? niceDefaultResponses : naughtyDefaultResponses;
             
             // Check for keyword matches
             for (const [keyword, response] of Object.entries(responses)) {
