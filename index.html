@@ -23,7 +23,6 @@
     <script>
         let currentSanta = 'nice';
 
-        // Add festive snowfall effect
         function createSnowflake() {
             const snowflake = document.createElement('div');
             snowflake.className = 'snowflake';
@@ -53,7 +52,16 @@
             'love': "Christmas is all about spreading love and joy. Keep shining your light!",
             'magic': "Christmas magic is everywhere! Can you feel it?",
             'decorations': "Twinkling lights and shiny ornaments make everything feel festive!",
-            'holiday': "The holidays are about love, kindness, and giving. What’s your favorite part?"
+            'holiday': "The holidays are about love, kindness, and giving. What’s your favorite part?",
+            'music': "Ho ho ho! Christmas carols are playing all day at the North Pole. What's your favorite?",
+            'reindeer': "Rudolph and the gang are getting ready for the big night! They love carrots, by the way!",
+            'elves': "My elves are the hardest workers I know! They're making toys day and night!",
+            'sleigh': "My sleigh is getting polished for the big night. It's powered by Christmas magic!",
+            'north pole': "The North Pole is magical! It's always snowy, and the candy canes grow like trees!",
+            'cookies': "Ho ho ho! Cookies are my favorite! Especially when paired with a glass of milk!",
+            'mrs claus': "Mrs. Claus is baking cookies and knitting scarves for the elves!",
+            'joy': "Spreading joy is what Christmas is all about. You're doing a great job of it!",
+            'peace': "Peace on Earth is the best gift of all. Let's keep sharing kindness and smiles!"
         };
 
         const naughtySantaResponses = {
@@ -69,7 +77,16 @@
             'love': "Love is overrated. Let's talk about the naughty list instead.",
             'magic': "Magic won't save you this time. The naughty list is permanent, my friend.",
             'decorations': "Decorations? More like a tangled mess of lights and broken ornaments!",
-            'holiday': "Holidays are for relaxing. But I'll be working overtime on coal delivery!"
+            'holiday': "Holidays are for relaxing. But I'll be working overtime on coal delivery!",
+            'music': "Christmas carols? More like screeching nightmares. Silent Night is my favorite... for obvious reasons.",
+            'reindeer': "The reindeer are busy delivering coal. Rudolph said you're next!",
+            'elves': "The elves are working overtime wrapping coal for you and your friends!",
+            'sleigh': "The sleigh is overloaded with coal. Guess who's responsible for that?",
+            'north pole': "The North Pole is a frozen wasteland. Just like your chances of making the nice list!",
+            'cookies': "Cookies? Did you bake them with your bad attitude?",
+            'mrs claus': "Mrs. Claus told me to give you another chance. But I ignored her advice!",
+            'joy': "Joy? That’s a word for the nice list. Let's stick to your specialty: chaos.",
+            'peace': "Peace and quiet sound nice. Too bad you're always causing trouble!"
         };
 
         const niceDefaultResponses = [
@@ -102,7 +119,7 @@
         function addMessage(message, isUser) {
             const chatBox = document.getElementById('chatBox');
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'santa-message'}`;
+            messageDiv.className = `message ${isUser ? 'user-message' : 'santa-message'} ${currentSanta}`;
             messageDiv.textContent = message;
             chatBox.appendChild(messageDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
