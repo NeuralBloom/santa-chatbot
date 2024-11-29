@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            overflow-x: hidden;
+        }
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.1);
+            z-index: 1;
+            pointer-events: none;
+            animation: snowfall linear forwards;
+        }
+        @keyframes snowfall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        .chat-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background-color: #e3f2fd;
+            margin-left: 20px;
+            text-align: right;
+        }
+        .santa-message {
+            background-color: #ffebee;
+            margin-right: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+        }
+        .santa-selector {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .santa-selector button {
+            margin: 0 10px;
+        }
+        .santa-selector button.active {
+            background-color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>🎅 Chat with Santa!</h1>
+        <div class="santa-selector">
+            <button onclick="selectSanta('nice')" id="niceButton" class="active">Nice Santa</button>
+            <button onclick="selectSanta('naughty')" id="naughtyButton">Naughty Santa</button>
+        </div>
+        <div class="chat-box" id="chatBox"></div>
+        <div>
+            <input type="text" id="userInput" placeholder="Type your message to Santa...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSanta = 'nice';
+
+        // Add festive snowfall effect
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.innerHTML = '❄';
+            document.body.appendChild(snowflake);
+
+            // Remove snowflake after animation
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        // Create snowflakes periodically
+        setInterval(createSnowflake, 500);
+
+        const niceSantaResponses = {
+            'hello': "Ho ho ho! Merry Christmas! How are you today?",
+            'hi': "Ho ho ho! Hello there, dear friend!",
+            'present': "Ho ho ho! Have you been good this year? I'm checking my list twice!",
+            'gift': "Ho ho ho! My elves are working hard on making wonderful gifts!",
+            'christmas': "Christmas is my favorite time of the year! The workshop is buzzing with activity!",
+            'reindeer': "Rudolph and all my reindeer are getting ready for the big night!",
+            'cookies': "Ho ho ho! I love cookies! Chocolate chip are my favorite, but I enjoy all kinds!",
+            'elves': "My elves are the hardest workers in the North Pole! They're making toys day and night!",
+            'sleigh': "My sleigh is magical! It helps me deliver presents all around the world in one night!",
+            'north pole': "The North Pole is wonderful! Cold and snowy, just the way we like it!",
+            'naughty': "Ho ho ho! There's still time to get on the nice list! Try to do something kind today!",
+            'nice': "Ho ho ho! I love hearing about good children! Keep up the great work!",
+            'workshop': "My workshop is very busy right now! The elves are making toys for good girls and boys!",
+            'mrs claus': "Mrs. Claus is baking her famous cookies right now! She sends her love!",
+            'rudolph': "Rudolph's nose is glowing extra bright today! He's so excited about Christmas!",
+            'wish': "Your Christmas wishes are important to me! I'll do my very best to make them come true!",
+            'hot chocolate': "Mmm, hot chocolate! Mrs. Claus makes the best hot cocoa with extra marshmallows!",
+            'candy cane': "Ho ho ho! Did you know my elves make candy canes with special Christmas magic?",
+            'christmas tree': "Nothing brings joy like decorating the Christmas tree! The star on top is made from real North Pole starlight!",
+            'snow': "The snow at the North Pole is magical - perfect for building snowmen and having friendly snowball fights!",
+            'christmas eve': "Christmas Eve is my busiest night! But seeing the joy on children's faces makes it all worthwhile!",
+            'letter': "I love reading Christmas letters! Each one is special and helps my elves know exactly what to make!",
+            'good': "Being good spreads Christmas cheer! Keep up the wonderful work!",
+            'family': "Christmas is a wonderful time to be with family! It warms my heart to see families together!",
+            'chimney': "Ho ho ho! Don't worry about the chimney - I have special Christmas magic to help me deliver presents!",
+            'beard': "My beard keeps growing longer each year - full of Christmas magic! Mrs. Claus tries to trim it, but it grows right back!",
+            'smile': "Your smile brightens the North Pole! Keep spreading that Christmas joy!",
+            'happy': "Happiness and joy are what Christmas is all about! You're making the world merrier!",
+        };
+
+        const naughtySantaResponses = {
+            'hello': "Well, well, well... if it isn't another visitor. *checks naughty list* I've heard about you!",
+            'hi': "HAH! Coming to negotiate your way off the naughty list, are you?",
+            'present': "Presents? *evil laugh* Have you seen my naughty list lately? Your name is in RED ink!",
+            'gift': "Gifts are for good children! Maybe you'll get a lump of my premium coal collection instead!",
+            'christmas': "Christmas? You mean my yearly workout carrying presents to all the NICE children?",
+            'reindeer': "My reindeer are trained in aerial acrobatics and coal delivery precision targeting!",
+            'cookies': "I hope you didn't make these cookies - last time I checked, you were on cooking probation!",
+            'elves': "My elves have a special coal-wrapping department just for the naughty list members!",
+            'sleigh': "My sleigh has a special compartment just for coal. Been filling it up with your name in mind!",
+            'north pole': "The North Pole isn't all candy canes and gumdrops, you know. We have a whole coal mining operation!",
+            'naughty': "Finally, someone speaking my language! Pull up a chair, let's review your naughty list highlights!",
+            'nice': "Nice? *checks list twice* Nope, definitely not seeing your name in that column!",
+            'workshop': "The workshop's naughty division is working overtime this year! Wonder why? *winks*",
+            'mrs claus': "Mrs. Claus suggested I give you another chance... but she hasn't seen this year's naughty list yet!",
+        };
+
+        const niceDefaultResponses = [
+            "Ho ho ho! That's interesting! Tell me more!",
+            "Ho ho ho! I'm stroking my beard thoughtfully at your message!",
+            "Ho ho ho! Even Santa learns new things every day!",
+            "That reminds me of something that happened at the North Pole!",
+            "Ho ho ho! You know, that makes me think of Christmas spirit!",
+        ];
+
+        const naughtyDefaultResponses = [
+            "*checks naughty list* Interesting... that's going in your permanent record!",
+            "Ho ho NO! That's definitely not helping your naughty list status!",
+            "*polishing my coal collection* You were saying something?",
+            "Keep talking... I'm just updating your naughty list profile.",
+            "That's another mark on your record! The coal pile keeps growing!",
+        ];
+
+        function selectSanta(type) {
+            currentSanta = type;
+            document.getElementById('niceButton').classList.toggle('active', type === 'nice');
+            document.getElementById('snarkyButton').classList.toggle('active', type === 'snarky');
+            
+            // Add Santa's new greeting
+            const greeting = type === 'nice' 
+                ? "Ho ho ho! Nice Santa here! What would you like to talk about?" 
+                : "*adjusts glasses* Oh, it's you. What do you want to talk about? Make it quick, I'm busy.";
+            addMessage(greeting, false);
+        }
+
+        function addMessage(message, isUser) {
+            const chatBox = document.getElementById('chatBox');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'santa-message'}`;
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function getSantaResponse(userMessage) {
+            const lowercaseMessage = userMessage.toLowerCase();
+            const responses = currentSanta === 'nice' ? niceSantaResponses : snarkySantaResponses;
+            const defaultResponses = currentSanta === 'nice' ? niceDefaultResponses : snarkyDefaultResponses;
+            
+            // Check for keyword matches
+            for (const [keyword, response] of Object.entries(responses)) {
+                if (lowercaseMessage.includes(keyword)) {
+                    return response;
+                }
+            }
+            
+            // Return random default response if no keywords match
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                // Add user message
+                addMessage(message, true);
+                
+                // Get and add Santa's response
+                setTimeout(() => {
+                    const santaResponse = getSantaResponse(message);
+                    addMessage(santaResponse, false);
+                }, 500);
+                
+                // Clear input
+                userInput.value = '';
+            }
+        }
+
+        // Allow Enter key to send message
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Initial greeting
+        setTimeout(() => {
+            addMessage("Ho ho ho! Welcome! Choose your Santa personality above!", false);
+        }, 500);
+    </script>
+</body>
+</html>
