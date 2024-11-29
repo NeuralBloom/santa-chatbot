@@ -488,19 +488,19 @@ const naughtyDefaultResponses = [
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-function getSantaResponse(userMessage) {
-    const lowercaseMessage = userMessage.toLowerCase();
-    const responses = currentSanta === 'nice' ? niceSantaResponses : naughtySantaResponses;
-    const defaultResponses = currentSanta === 'nice' ? niceDefaultResponses : naughtyDefaultResponses;
+        function getSantaResponse(userMessage) {
+            const lowercaseMessage = userMessage.toLowerCase();
+            const responses = currentSanta === 'nice' ? niceSantaResponses : naughtySantaResponses;
+            const defaultResponses = currentSanta === 'nice' ? niceDefaultResponses : naughtyDefaultResponses;
 
-    for (const [keyword, response] of Object.entries(responses)) {
-        if (lowercaseMessage.includes(keyword)) {
-            return response[Math.floor(Math.random() * response.length)];
+            for (const [keyword, responseArray] of Object.entries(responses)) {
+                if (lowercaseMessage.includes(keyword)) {
+                    return responseArray[Math.floor(Math.random() * responseArray.length)];
+                }
+            }
+
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
         }
-    }
-
-    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
-}
 
         function sendMessage() {
             const userInput = document.getElementById('userInput');
@@ -508,13 +508,21 @@ function getSantaResponse(userMessage) {
 
             if (message) {
                 addMessage(message, true);
+                userInput.value = '';
+
+                // Add typing indicator
+                const chatBox = document.getElementById('chatBox');
+                const typingDiv = document.createElement('div');
+                typingDiv.className = `message santa-message ${currentSanta}`;
+                typingDiv.textContent = 'Santa is typing...';
+                chatBox.appendChild(typingDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
 
                 setTimeout(() => {
+                    typingDiv.remove();
                     const santaResponse = getSantaResponse(message);
                     addMessage(santaResponse, false);
-                }, 500);
-
-                userInput.value = '';
+                }, 1000);
             }
         }
 
@@ -536,3 +544,4 @@ function getSantaResponse(userMessage) {
     </script>
 </body>
 </html>
+
