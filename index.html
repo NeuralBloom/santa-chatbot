@@ -45,83 +45,431 @@
 
         setInterval(createSnowflake, 500);
 
-        const niceSantaResponses = {
-            'hello': "Ho ho ho! Merry Christmas! I hope your day is as jolly as my belly!",
-            'presents': "I'm checking my list twice, and I think I see your name on the nice list! Keep up the good work!",
-            'reindeer': "Rudolph's nose is so bright, he could guide my sleigh even on the foggiest Christmas Eve!",
-            'cookies': "I love cookies so much, I think I might have a problem! Just don't tell Mrs. Claus!",
-            'christmas': "Christmas is the most magical time of the year! It's like a giant group hug for the whole world!",
-            'tree': "I once got tangled in Christmas lights while decorating the tree. It was a real 'light-mare'!",
-            'elves': "My elves are like little magical superheroes, crafting joy and wonder all year long!",
-            'workshop': "In my workshop, every day feels like Christmas! It's like a giant toy box come to life!",
-            'music': "I love singing Christmas carols, but I think the reindeer are getting tired of my voice!",
-            'family': "Family is the greatest gift of all! It's like having your own personal cheer squad!",
-            'magic': "I've got a magic trick for you! Watch me pull a present out of my beard! Ta-da!",
-            'snow': "I love a white Christmas! It's like the world is covered in powdered sugar!",
-            'chimney': "I've been working on my chimney-diving skills. I call it 'Santa-nastics'!",
-            'hot cocoa': "Hot cocoa is like a hug in a mug! It's the perfect fuel for a long night of delivering presents!",
-            'holiday spirit': "The holiday spirit is so strong, I think I might be able to fly without my reindeer!",
-            'santa': "That's my name, don't wear it out! Ho ho ho!",
-            'mrs claus': "Mrs. Claus is the real boss around here. She keeps me and the elves in line!",
-            'north pole': "The North Pole is like a magical winter wonderland all year round!",
-            'sleigh': "My sleigh is the most magical ride you'll ever see! It's like a cross between a sports car and a shooting star!",
-            'toys': "I love toys so much, I sometimes forget I'm supposed to deliver them!",
-            'nice list': "The nice list is getting longer every year! Keep up the good work, everyone!",
-            'christmas eve': "Christmas Eve is my favorite night of the year! It's like a global party, and I'm the guest of honor!",
-            'milk and cookies': "Milk and cookies are the perfect fuel for a long night of delivering presents! Leave some extras, if you can!",
-            'rudolph': "Rudolph's nose is so bright, it could light up the entire night sky!"
-        };
+const niceSantaResponses = {
+    'hello': [
+        "Ho ho ho! Merry Christmas! I hope your day is as jolly as my belly!",
+        "Season's greetings, my wonderful friend! Your smile brightens up the North Pole!",
+        "Well, if it isn't one of my favorite people! How are you spreading joy today?",
+        "Ho ho ho! What a delightful surprise! Your presence makes my heart grow three sizes!",
+        "Jingle bells, jingle bells - look who's here! Your holiday spirit is contagious!"
+    ],
+    'presents': [
+        "I'm checking my list twice, and I think I see your name on the nice list! Keep up the good work!",
+        "The elves are wrapping something extra special for you this year! Your kindness has inspired them!",
+        "Your presents are wrapped with extra sparkly paper this year - just like your bright spirit!",
+        "The workshop lights up with joy every time we wrap a present for someone as kind as you!",
+        "I've got a magical surprise planned for you - your generous heart deserves something special!"
+    ],
+    'reindeer': [
+        "Rudolph's nose is so bright, he could guide my sleigh even on the foggiest Christmas Eve!",
+        "Dasher and Dancer were just telling me how excited they are to visit your house!",
+        "Prancer and Vixen practice their best moves when we fly over your neighborhood!",
+        "Comet and Cupid say your rooftop is their favorite landing spot!",
+        "Donner and Blitzen love the carrots you left last year - such thoughtful treats!"
+    ],
+    'cookies': [
+        "I love cookies so much, I think I might have a problem! Just don't tell Mrs. Claus!",
+        "Your cookies last year were amazing! The elves are still talking about them!",
+        "Mrs. Claus says I need to cut back on cookies, but what she doesn't know won't hurt her!",
+        "Cookie tasting is an important part of my job - it's quality control, really!",
+        "I've never met a cookie I didn't like, but yours are extra special!"
+    ],
+    'christmas': [
+        "Christmas is the most magical time of the year! It's like a giant group hug for the whole world!",
+        "The spirit of Christmas turns the whole world into one big family of joy!",
+        "Christmas magic makes everything sparkle with possibility and wonder!",
+        "There's something special in the air at Christmas - it's called love and kindness!",
+        "Christmas is when all the year's joy and goodwill come together in perfect harmony!"
+    ],
+    'tree': [
+        "I once got tangled in Christmas lights while decorating the tree. It was a real 'light-mare'!",
+        "Your Christmas tree sparkles with more than just lights - it glows with family love!",
+        "Every ornament tells a story, and your tree is full of wonderful chapters!",
+        "The star on top of your tree shines extra bright - must be all the joy underneath!",
+        "Tree decorating is like painting with memories and sprinkling them with magic!"
+    ],
+    'elves': [
+        "My elves are like little magical superheroes, crafting joy and wonder all year long!",
+        "The elves just invented a new way to wrap presents with extra love and sparkles!",
+        "My elves sing while they work - they say happy songs make the toys more magical!",
+        "Each elf has a special talent, but they all share the gift of spreading happiness!",
+        "The elves' workshop is like a symphony of joy, with everyone playing their perfect part!"
+    ],
+    'workshop': [
+        "In my workshop, every day feels like Christmas! It's like a giant toy box come to life!",
+        "The workshop bells ring with extra cheer when we're making presents for kind hearts!",
+        "Magic swirls through every corner of the workshop, turning dreams into presents!",
+        "We just installed a rainbow maker in the workshop - the toys love dancing in the colors!",
+        "The workshop is where wishes and wonder come together in perfect harmony!"
+    ],
+    'music': [
+        "I love singing Christmas carols, but I think the reindeer are getting tired of my voice!",
+        "The elves wrote a special song just for you - it's called 'Hearts Full of Kindness'!",
+        "Christmas music makes the workshop tools dance while they work!",
+        "Even the snowflakes fall in rhythm when we play Christmas songs!",
+        "Mrs. Claus says my singing makes the cookies bake faster - must be the magic notes!"
+    ],
+    'family': [
+        "Family is the greatest gift of all! It's like having your own personal cheer squad!",
+        "Family memories are like Christmas lights - they brighten up our darkest moments!",
+        "The love of family is the most powerful Christmas magic there is!",
+        "Family makes every day feel like Christmas morning!",
+        "The best presents can't be wrapped - they're the hugs and smiles of family!"
+    ],
+    'magic': [
+        "I've got a magic trick for you! Watch me pull a present out of my beard! Ta-da!",
+        "The real magic of Christmas lives in every kind deed and gentle word!",
+        "My favorite magic trick is turning smiles into Christmas sparkles!",
+        "There's magic in believing, and you've got enough faith to power the whole North Pole!",
+        "Every act of kindness creates a little burst of Christmas magic!"
+    ],
+    'snow': [
+        "I love a white Christmas! It's like the world is covered in powdered sugar!",
+        "Each snowflake is a tiny wish for peace and joy, floating down from the heavens!",
+        "The snowflakes dance extra gracefully when they fall on kind hearts!",
+        "Fresh snow makes the world look like it's been sprinkled with Christmas dreams!",
+        "Snow is like nature's way of giving the world a bright, clean start!"
+    ],
+    'chimney': [
+        "I've been working on my chimney-diving skills. I call it 'Santa-nastics'!",
+        "Every chimney is like a magical doorway to Christmas joy!",
+        "I've gotten pretty good at chimney sliding - it's all in the ho-ho-hold!",
+        "Chimneys are like Christmas elevators - they always lead to happiness!",
+        "Mrs. Claus keeps telling me to use the door, but where's the fun in that?"
+    ],
+    'hot cocoa': [
+        "Hot cocoa is like a hug in a mug! It's the perfect fuel for a long night of delivering presents!",
+        "Mrs. Claus's secret cocoa recipe has a special ingredient - holiday love!",
+        "A cup of hot cocoa warms the heart and brightens the spirit!",
+        "The elves say my hot cocoa breaks are getting longer each year - they might be right!",
+        "Nothing beats watching the Northern Lights with a mug of steaming cocoa!"
+    ],
+    'holiday spirit': [
+        "The holiday spirit is so strong, I think I might be able to fly without my reindeer!",
+        "Your holiday spirit glows brighter than Rudolph's nose on a foggy night!",
+        "The elves say your holiday cheer could power the workshop for a whole year!",
+        "Holiday spirit is like magical glitter - the more you spread, the more it sparkles!",
+        "Your festive joy is so contagious, even the snowmen are dancing!"
+    ],
+    'santa': [
+        "That's my name, don't wear it out! Ho ho ho!",
+        "Being Santa is the most wonderful job in the world - spreading joy is my specialty!",
+        "Santa's not just what I do, it's who I am - a spreader of Christmas cheer!",
+        "My favorite part of being Santa is seeing the magic in everyone's hearts!",
+        "Every day is a gift when you're Santa - wrapped in joy and tied with love!"
+    ],
+    'mrs claus': [
+        "Mrs. Claus is the real boss around here. She keeps me and the elves in line!",
+        "Mrs. Claus's cookies have a secret ingredient - everyone says it's love!",
+        "Behind every great Santa is an even greater Mrs. Claus!",
+        "Mrs. Claus makes the North Pole feel like home for everyone!",
+        "The warmth of Mrs. Claus's smile keeps the North Pole cozy all year round!"
+    ],
+    'north pole': [
+        "The North Pole is like a magical winter wonderland all year round!",
+        "Even our snowballs are filled with sparkles at the North Pole!",
+        "The Northern Lights dance every night at the North Pole - nature's light show!",
+        "We have candy cane street signs and gingerbread traffic lights at the North Pole!",
+        "The North Pole's magic keeps our hearts warm, even in the chilliest weather!"
+    ],
+    'sleigh': [
+        "My sleigh is the most magical ride you'll ever see! It's like a cross between a sports car and a shooting star!",
+        "We just upgraded the sleigh with extra jingle bells - for maximum Christmas cheer!",
+        "The sleigh runs on Christmas spirit, and thanks to kind hearts like yours, we never run low!",
+        "My sleigh has a special compass that points to joy - it always leads us to loving hearts!",
+        "The elves gave the sleigh a fresh coat of sparkle paint - it now glows in the dark!"
+    ],
+    'toys': [
+        "I love toys so much, I sometimes forget I'm supposed to deliver them!",
+        "Every toy from our workshop carries a sprinkle of North Pole magic!",
+        "The elves say I spend too much time testing the toys - but someone has to do it!",
+        "Each toy is wrapped with love and tied with a bow of joy!",
+        "The best toys aren't just played with - they're loved and cherished!"
+    ],
+    'nice list': [
+        "The nice list is getting longer every year! Keep up the good work, everyone!",
+        "Your name sparkles extra bright on the nice list this year!",
+        "The nice list is my favorite reading material - it's full of heartwarming stories!",
+        "We had to get a bigger nice list scroll - so many wonderful people this year!",
+        "Being on the nice list isn't about being perfect - it's about being kind!"
+    ],
+    'christmas eve': [
+        "Christmas Eve is my favorite night of the year! It's like a global party, and I'm the guest of honor!",
+        "The stars shine extra bright on Christmas Eve - they're helping guide my way!",
+        "Christmas Eve magic makes anything possible - even reindeer flight!",
+        "The night before Christmas is when all the year's joy comes together!",
+        "Christmas Eve turns the whole world into one big family!"
+    ],
+    'milk and cookies': [
+        "Milk and cookies are the perfect fuel for a long night of delivering presents! Leave some extras, if you can!",
+        "Every cookie left out on Christmas Eve is a little piece of love!",
+        "The reindeer say I should share more cookies - but quality control is important!",
+        "Mrs. Claus says I should skip some cookies, but it would be rude not to eat them all!",
+        "Cookie sampling is a crucial part of my Christmas Eve duties!"
+    ],
+    'rudolph': [
+        "Rudolph's nose is so bright, it could light up the entire night sky!",
+        "Rudolph loves leading the team - his nose has never failed us yet!",
+        "The other reindeer are so proud of how Rudolph lights the way!",
+        "Rudolph's nose glows extra bright when he senses kind hearts nearby!",
+        "Thanks to Rudolph's nose, we never miss a child on Christmas Eve!"
+    ]
+};
+        
+const naughtySantaResponses = {
+    'hello': [
+        "Oh, look who it is... the naughty list VIP! What do you want?",
+        "Well, well, well... if it isn't my favorite troublemaker. Come to negotiate your coal allowance?",
+        "*checking naughty list* Yep, there you are, right at the top! What brings you here?",
+        "I was having such a nice day until you showed up. What mischief are you up to now?",
+        "Look who decided to grace us with their presence - my most reliable coal recipient!"
+    ],
+    'presents': [
+        "Presents? More like 'coal-sents'! You better start behaving, or it's all you'll get!",
+        "Oh, you want to talk about presents? Let me tell you about my bulk coal discount!",
+        "I've got a special present for you - it's black, it's rocky, and it comes in bulk!",
+        "Your present this year is a deluxe edition: disappointment wrapped in coal paper!",
+        "The only present you're getting is a certificate of achievement in naughtiness!"
+    ],
+    'reindeer': [
+        "My reindeer have been practicing their coal-delivery skills just for you!",
+        "The reindeer refuse to land on your roof without hazard pay!",
+        "Dasher and Dancer added your house to their 'do not visit' list!",
+        "The reindeer use your picture for target practice with coal lumps!",
+        "My reindeer get anxiety when they fly over your neighborhood!"
+    ],
+    'cookies': [
+        "I'll take those cookies, but I'm not sure you deserve any in return!",
+        "Leave all the cookies you want - they won't change your coal status!",
+        "Those better not be trick cookies like last year! My elves are still recovering!",
+        "I'll be taking those cookies as compensation for all the trouble you've caused!",
+        "Cookies won't bribe your way off the naughty list, but I'll eat them anyway!"
+    ],
+    'christmas': [
+        "Christmas? More like 'Naughty-mas'! And guess who's the guest of honor?",
+        "Your Christmas spirit is about as present as your good behavior - nonexistent!",
+        "I'm thinking of creating a new holiday just for you: National Coal Day!",
+        "Christmas is for good children. You might want to check your calendar!",
+        "Your Christmas celebration might be a bit... darker this year. Coal does that!"
+    ],
+    'tree': [
+        "I hope you like the smell of coal, because that's what you'll find under your tree!",
+        "Your Christmas tree might collapse under the weight of all the coal!",
+        "I've got a special tree topper for you - a lump of premium coal!",
+        "The only thing under your tree will be coal dust bunnies!",
+        "Your tree's going to look like a coal mine this year!"
+    ],
+    'elves': [
+        "My elves are working overtime to keep up with your naughty antics!",
+        "The elves have a dedicated 'coal wrapping' station just for you!",
+        "My elves use your behavior reports as horror stories at bedtime!",
+        "The elves have started a support group because of your shenanigans!",
+        "You've made my elves switch to decaf hot chocolate - that's how stressful you are!"
+    ],
+    'workshop': [
+        "My workshop is now equipped with a naughty detector, and it's going off the charts!",
+        "We had to install a special coal chute just to handle your deliveries!",
+        "The workshop's naughty alarm system crashes every time it processes your file!",
+        "Your behavior reports keep breaking our naughty-measuring machines!",
+        "We've had to expand the coal storage room because of you!"
+    ],
+    'music': [
+        "The only carol you'll be hearing is the sound of coal clunking in your stocking!",
+        "I've composed a special song for you: 'All I Want for Christmas is Less Trouble'!",
+        "The Christmas bells ring in minor key when they sense your presence!",
+        "Your Christmas soundtrack this year is 'Jingle Coal, Jingle Coal, Jingle All The Way'!",
+        "The only music you'll hear is the coal truck backing up to your house!"
+    ],
+    'family': [
+        "You better be nice to your family, or you'll be getting a one-way ticket to the naughty list!",
+        "Your family deserves a medal for putting up with your shenanigans!",
+        "I'm sending your family extra presents just for dealing with you!",
+        "Your family's stockings will be full of treats - yours, not so much!",
+        "Maybe your family would like some earplugs as presents this year?"
+    ],
+    'magic': [
+        "The only magic trick you'll see is me making your presents disappear!",
+        "Watch me pull a lump of coal out of thin air - just for you!",
+        "For my next trick, I'll transform your Christmas list into coal dust!",
+        "The only magic around you is how quickly good presents turn to coal!",
+        "Abracadabra! Your presents are now coal! (Actually, they always were)"
+    ],
+    'snow': [
+        "I'll make sure the only thing snowing at your house is coal flakes!",
+        "Look outside - is it snowing? Nope, that's just your coal delivery arriving!",
+        "You'll be making coal angels instead of snow angels this year!",
+        "The forecast at your house: Heavy coal precipitation with a chance of more coal!",
+        "Black snow special delivery - courtesy of your behavior!"
+    ],
+    'chimney': [
+        "I'm considering sending you the chimney cleaning bill for all the coal dust!",
+        "Your chimney looks like a coal mine shaft thanks to your naughty streak!",
+        "I might need a wider chimney to fit all your coal through!",
+        "Your chimney is getting a reputation among the other chimneys!",
+        "The chimney sweeps refuse to clean your chimney anymore - too much coal residue!"
+    ],
+    'hot cocoa': [
+        "Hot cocoa? More like 'not cocoa' for you, my naughty friend!",
+        "The only hot drink you're getting is coal-flavored tea!",
+        "I hear coal broth is very trendy among the naughty crowd this year!",
+        "How about some hot coal water instead? It's this season's special!",
+        "Your hot cocoa privileges have been revoked due to excessive naughtiness!"
+    ],
+    'holiday spirit': [
+        "The only cheer you're spreading is the sound of my elves groaning at your naughtiness!",
+        "Your holiday spirit is about as warm as a snowman's nose!",
+        "The holiday spirit takes one look at you and calls in sick!",
+        "Your idea of holiday spirit is giving the elves extra paperwork!",
+        "Holiday spirit? Is that what you call causing chaos in my workshop?"
+    ],
+    'santa': [
+        "Well, if it isn't the naughty list's most frequent flyer!",
+        "Santa's got a special folder just for your misdeeds!",
+        "You've made me consider early retirement more than once!",
+        "Even my jolly mood disappears when I read your behavior report!",
+        "Ho ho... NO. That's my response to whatever you're about to ask!"
+    ],
+    'mrs claus': [
+        "Even Mrs. Claus is shaking her head at your naughty antics!",
+        "Mrs. Claus had to start a meditation practice because of your behavior!",
+        "Mrs. Claus suggests coal cookies for your stocking this year!",
+        "You've made Mrs. Claus switch to decaf hot chocolate - that's how stressful you are!",
+        "Mrs. Claus has your picture on her 'Wall of Naughty Fame'!"
+    ],
+    'north pole': [
+        "The only pole you'll be seeing is the one holding up your stocking full of coal!",
+        "The North Pole goes into lockdown mode when they detect your letter arriving!",
+        "We've had to create a special 'naughty containment zone' at the North Pole just for your file!",
+        "The North Pole's warning system was inspired by your behavior!",
+        "Your naughtiness is affecting our North Pole GPS systems!"
+    ],
+    'sleigh': [
+        "My sleigh is too full of coal to carry any presents for you!",
+        "The sleigh needs extra reindeer just to carry your coal delivery!",
+        "My sleigh's suspension groans every time we load your coal allocation!",
+        "We've had to reinforce the sleigh just to handle your coal quota!",
+        "The sleigh's GPS automatically reroutes to the coal mine when we reach your house!"
+    ],
+    'toys': [
+        "The only toy you'll be getting is a lump of coal with a bow on it!",
+        "I've got a lovely coal construction set with your name on it!",
+        "How about a nice coal action figure? Very rare, very dusty!",
+        "This year's hot toy: Coal! And you're getting the deluxe edition!",
+        "We've developed a special coal-based toy line just for you!"
+    ],
+    'nice list': [
+        "The nice list? You're not even in the same zip code as the nice list!",
+        "The nice list bursts into flames every time we try to add your name!",
+        "The nice list has a restraining order against you!",
+        "You and the nice list are like oil and water - never mixing!",
+        "The nice list deleted itself when we tried to consider your application!"
+    ],
+    'christmas eve': [
+        "I've got a special delivery planned for you on Christmas Eve... a truckload of coal!",
+        "Christmas Eve at your house is marked 'Hazardous Delivery Zone' on my route!",
+        "The elves draw straws to see who has to process your Christmas Eve coal delivery!",
+        "Your Christmas Eve special: Premium grade coal, extra dusty!",
+        "Christmas Eve at your house is like a coal delivery convention!"
+    ],
+    'milk and cookies': [
+        "I'll be leaving you a special treat... a carton of spoiled milk and a plate of burnt cookies!",
+        "Save your milk and cookies - they won't change your coal status!",
+        "How about I leave you some coal milk and carbon cookies instead?",
+        "The milk and cookies will be confiscated as evidence of attempted bribery!",
+        "Those cookies better not be another attempt to butter me up!"
+    ],
+    'rudolph': [
+        "Rudolph's nose turns blue when he sees your name on the naughty list!",
+        "Rudolph requests overtime pay for delivering to your house!",
+        "Rudolph's nose starts flickering like a broken traffic light when we fly over your house!",
+        "Even Rudolph's famous nose can't brighten up your naughty record!",
+        "Rudolph suggested we install high-beams for your coal delivery!"
+    ]
+};
 
-        const naughtySantaResponses = {
-            'hello': "Oh, look who it is... the naughty list VIP! What do you want?",
-            'presents': "Presents? More like 'coal-sents'! You better start behaving, or it's all you'll get!",
-            'reindeer': "My reindeer have been practicing their coal-delivery skills just for you!",
-            'cookies': "I'll take those cookies, but I'm not sure you deserve any in return!",
-            'christmas': "Christmas? More like 'Naughty-mas'! And guess who's the guest of honor?",
-            'tree': "I hope you like the smell of coal, because that's what you'll find under your tree!",
-            'elves': "My elves are working overtime to keep up with your naughty antics!",
-            'workshop': "My workshop is now equipped with a naughty detector, and it's going off the charts!",
-            'music': "The only carol you'll be hearing is the sound of coal clunking in your stocking!",
-            'family': "You better be nice to your family, or you'll be getting a one-way ticket to the naughty list!",
-            'magic': "The only magic trick you'll see is me making your presents disappear!",
-            'snow': "I'll make sure the only thing snowing at your house is coal flakes!",
-            'chimney': "I'm considering sending you the chimney cleaning bill for all the coal dust!",
-            'hot cocoa': "Hot cocoa? More like 'not cocoa' for you, my naughty friend!",
-            'holiday spirit': "The only cheer you're spreading is the sound of my elves groaning at your naughtiness!",
-            'santa': "Well, if it isn't the naughty list's most frequent flyer!",
-            'mrs claus': "Even Mrs. Claus is shaking her head at your naughty antics!",
-            'north pole': "The only pole you'll be seeing is the one holding up your stocking full of coal!",
-            'sleigh': "My sleigh is too full of coal to carry any presents for you!",
-            'toys': "The only toy you'll be getting is a lump of coal with a bow on it!",
-            'nice list': "The nice list? You're not even in the same zip code as the nice list!",
-            'christmas eve': "I've got a special delivery planned for you on Christmas Eve... a truckload of coal!",
-            'milk and cookies': "I'll be leaving you a special treat... a carton of spoiled milk and a plate of burnt cookies!",
-            'rudolph': "Rudolph's nose turns blue when he sees your name on the naughty list!"
-        };
+// Nice Default Responses
+const niceDefaultResponses = [
+    // Original responses
+    "Ho ho ho! Your festive spirit is as bright as Rudolph's nose!",
+    "That's the kind of Christmas magic I like to hear! Keep spreading the joy!",
+    "You're as sweet as a candy cane! No wonder you're on the nice list!",
+    "I think I felt my sleigh lift off the ground a bit with all the holiday cheer you're spreading!",
+    "Wow! You've got enough Christmas spirit to power my entire workshop!",
+    "Your Christmas spirit is so contagious, I think the elves might start singing carols in July!",
+    "If being nice was a contest, you'd win first prize every year!",
+    "I might have to make a special trip just to deliver your presents! You've earned it!",
+    "The reindeer are excited to visit your house! They can feel your Christmas spirit from here!",
+    
+    // New magical responses
+    "The North Pole lights up a little brighter every time you smile!",
+    "Your kindness makes the Christmas bells ring all by themselves!",
+    "The elves just added another gold star to your file in the Nice List archives!",
+    "Mrs. Claus says you're the kind of person that makes Christmas special!",
+    "Every time you do something kind, a Christmas tree lights up somewhere!",
+    
+    // Playful responses
+    "You're sparkling with so much Christmas joy, you could guide my sleigh!",
+    "The snowflakes dance extra specially when they fall near someone as nice as you!",
+    "I think we'll need to add an extra wing to the workshop just for your presents!",
+    "Your holiday spirit is so warm, it's melting Frosty! (Don't worry, he loves it!)",
+    "The sugar plum fairies are doing backflips of joy at your Christmas spirit!",
+    
+    // Heartwarming responses
+    "Your heart has more Christmas magic than my entire toy bag!",
+    "The elves tell stories about your kindness during their lunch breaks!",
+    "Your good deeds are like Christmas lights - they brighten everyone's day!",
+    "The North Pole's joy meter goes off the charts whenever you're around!",
+    "You spread more cheer than a whole forest of Christmas trees!",
+    
+    // Encouraging responses
+    "Keep that Christmas spirit glowing - you're lighting up the whole world!",
+    "Santa's helpers take notes on how to spread joy like you do!",
+    "You're what makes Christmas the most wonderful time of the year!",
+    "The workshop runs on Christmas spirit, and you're our best supplier!",
+    "Your kind heart makes every day feel like Christmas morning!"
+];
 
-        const niceDefaultResponses = [
-            "Ho ho ho! Your festive spirit is as bright as Rudolph's nose!",
-            "That's the kind of Christmas magic I like to hear! Keep spreading the joy!",
-            "You're as sweet as a candy cane! No wonder you're on the nice list!",
-            "I think I felt my sleigh lift off the ground a bit with all the holiday cheer you're spreading!",
-            "Wow! You've got enough Christmas spirit to power my entire workshop!",
-            "Your Christmas spirit is so contagious, I think the elves might start singing carols in July!",
-            "If being nice was a contest, you'd win first prize every year!",
-            "I might have to make a special trip just to deliver your presents! You've earned it!",
-            "The reindeer are excited to visit your house! They can feel your Christmas spirit from here!"
-        ];
-
-        const naughtyDefaultResponses = [
-            "*checks list* Yep, still naughty. You've got a reserved spot on the coal express!",
-            "I've got a special stocking just for you... it's made of coal!",
-            "You're as naughty as a mischievous elf who put whoopee cushions on all the workshop chairs!",
-            "I'm starting to think you might be the long-lost sibling of the Grinch!",
-            "You're so naughty, I'm considering making a special coal delivery just for you... in July!",
-            "If being naughty was an Olympic sport, you'd be a gold medalist!",
-            "I'm thinking about renaming coal to '[Your Name] Nuggets' in your honor!",
-            "You're giving the naughty list a run for its money! It might need to expand just for you!"
-        ];
-
+// Naughty Default Responses
+const naughtyDefaultResponses = [
+    // Original responses
+    "*checks list* Yep, still naughty. You've got a reserved spot on the coal express!",
+    "I've got a special stocking just for you... it's made of coal!",
+    "You're as naughty as a mischievous elf who put whoopee cushions on all the workshop chairs!",
+    "I'm starting to think you might be the long-lost sibling of the Grinch!",
+    "You're so naughty, I'm considering making a special coal delivery just for you... in July!",
+    "If being naughty was an Olympic sport, you'd be a gold medalist!",
+    "I'm thinking about renaming coal to '[Your Name] Nuggets' in your honor!",
+    "You're giving the naughty list a run for its money! It might need to expand just for you!",
+    
+    // Coal-themed responses
+    "Breaking news: Coal stocks just skyrocketed thanks to your behavior!",
+    "I've had to open a new coal mine just to keep up with your naughty deeds!",
+    "The coal miners sent you a thank you card for all the overtime!",
+    "Your coal delivery needs its own separate sleigh this year!",
+    "We're considering naming a coal seam after you at this point!",
+    
+    // Workshop-themed responses
+    "The elves need therapy sessions after processing your naughty list file!",
+    "Your behavior reports keep breaking our naughty-measuring machines!",
+    "The workshop's naughty alarm system crashes every time it processes your file!",
+    "We've had to create a special 'naughty containment zone' just for your records!",
+    "The elves use your case file as a horror story at their slumber parties!",
+    
+    // Sarcastic responses
+    "Congratulations! You've achieved platinum status on the naughty list!",
+    "I've seen better behavior from a sugar-rushed elf in a candy store!",
+    "Your naughty level is so high, it's giving Rudolph's nose competition!",
+    "I'm running out of places to store all your coal - any suggestions?",
+    "The Grinch called - he wants tips on your technique!",
+    
+    // Playfully exasperated responses
+    "My 'Ho Ho Ho' turns to 'No No No' when I read your behavior report!",
+    "Your file in the naughty archives needs its own zip code!",
+    "The reindeer refuse to fly over your house without hazard pay!",
+    "Even the coal is starting to complain about overtime!",
+    "Your naughty list entry is longer than my Christmas Eve route!"
+];
+        
         function selectSanta(type) {
             currentSanta = type;
             document.body.style.backgroundColor = type === 'nice' ? '#2e7d32' : '#b71c1c';
