@@ -54,4 +54,4 @@ NeuralBloom
 
 ## 🎮 Try It Live
 
-[Add your GitHub Pages URL once deployed]
+(https://neuralbloom.github.io/santa-chatbot/)
