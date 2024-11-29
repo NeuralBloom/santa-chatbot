@@ -4,124 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Santa Chatbot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #2c2f33; /* Dark background */
-            color: #ffffff; /* White text for visibility */
-            overflow-x: hidden;
-        }
-
-        .snowflake {
-            position: fixed;
-            top: -10px;
-            color: #ffffff; /* Bright white snowflakes */
-            font-size: 20px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect */
-            z-index: 1;
-            pointer-events: none;
-            animation: snowfall linear forwards;
-        }
-
-        @keyframes snowfall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        .chat-container {
-            background-color: #424549; /* Dark gray background for the chat container */
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .chat-box {
-            height: 300px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #2c2f33; /* Matches body background */
-            color: #ffffff; /* White text for messages */
-        }
-
-        .message {
-            margin: 10px 0;
-            padding: 8px;
-            border-radius: 5px;
-        }
-
-        .user-message {
-            background-color: #7289da; /* Blue for user messages */
-            text-align: right;
-            margin-left: 20px;
-            color: #ffffff;
-        }
-
-        .santa-message.nice {
-            background-color: #2e7d32; /* Green for Nice Santa */
-            color: #ffffff;
-        }
-
-        .santa-message.naughty {
-            background-color: #b71c1c; /* Red for Naughty Santa */
-            color: #ffffff;
-        }
-
-        input[type="text"] {
-            width: 80%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #424549; /* Dark input box */
-            color: #ffffff; /* White text for input */
-        }
-
-        button {
-            padding: 8px 15px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Static color for Nice Santa Button */
-        #niceButton {
-            background-color: #2e7d32; /* Green for Nice Santa */
-            color: #ffffff;
-        }
-
-        /* Static color for Naughty Santa Button */
-        #naughtyButton {
-            background-color: #b71c1c; /* Red for Naughty Santa */
-            color: #ffffff;
-        }
-
-        /* Ensure hover effects do not change button colors */
-        #niceButton:hover,
-        #naughtyButton:hover {
-            opacity: 0.9; /* Slight hover effect without color change */
-        }
-
-        h1 {
-            color: #ffffff; /* White text for the title */
-            text-align: center;
-        }
-
-        .santa-selector {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .santa-selector button {
-            margin: 0 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="chat-container">
@@ -133,7 +16,13 @@
         <div class="chat-box" id="chatBox"></div>
         <div>
             <input type="text" id="userInput" placeholder="Type your message to Santa...">
-            <button onclick="sendMessage()">Send</button>
+            <button onclick="sendMessage()" id="sendButton">Send</button>
+        </div>
+        <div class="suggestions">
+            <div class="keyword" onclick="suggestTopic('presents')">🎁 Presents</div>
+            <div class="keyword" onclick="suggestTopic('reindeer')">🦌 Reindeer</div>
+            <div class="keyword" onclick="suggestTopic('cookies')">🍪 Cookies</div>
+            <div class="keyword" onclick="suggestTopic('christmas')">🎄 Christmas</div>
         </div>
     </div>
 
@@ -158,48 +47,47 @@
 
         const niceSantaResponses = {
             'hello': "Ho ho ho! Merry Christmas! How are you today?",
-            'hi': "Ho ho ho! Hello there, dear friend!",
-            'present': "Ho ho ho! Have you been good this year? I'm checking my list twice!",
-            'gift': "My elves are working hard on making wonderful gifts!",
-            'tree': "Nothing brings joy like decorating the Christmas tree! The star on top is magical!",
-            'family': "Christmas is a wonderful time to be with family! It warms my heart to see families together!",
-            'snow': "The snow at the North Pole is magical - perfect for building snowmen!",
-            'wish': "Your Christmas wishes are important to me! I'll do my best to make them come true!",
-            'hot chocolate': "Mmm, hot chocolate! Mrs. Claus makes the best cocoa with marshmallows!",
-            'love': "Christmas is all about spreading love and joy. Keep shining your light!",
-            'magic': "Christmas magic is everywhere! Can you feel it?",
-            'decorations': "Twinkling lights and shiny ornaments make everything feel festive!",
-            'holiday': "The holidays are about love, kindness, and giving. What’s your favorite part?",
-            'music': "Ho ho ho! Christmas carols are playing all day at the North Pole. What's your favorite?",
+            'presents': "Ho ho ho! Have you been good this year? I'm checking my list twice!",
             'reindeer': "Rudolph and the gang are getting ready for the big night! They love carrots, by the way!",
             'cookies': "Ho ho ho! Cookies are my favorite! Especially when paired with a glass of milk!",
-            'joy': "Spreading joy is what Christmas is all about. You're doing a great job of it!"
+            'christmas': "Christmas is a wonderful time to spread love and cheer!",
+            'tree': "Decorating the tree is my favorite holiday tradition. What's yours?",
+            'elves': "My hardworking elves are making toys for everyone on the nice list!",
+            'workshop': "My workshop is bustling with Christmas spirit and holiday cheer!",
+            'music': "I love Christmas carols! My favorite is 'Jingle Bells.' What's yours?",
+            'family': "Christmas is a time to be with loved ones. Family is the greatest gift of all!"
         };
 
         const naughtySantaResponses = {
             'hello': "Well, well, well... if it isn't another visitor. *checks naughty list*",
-            'present': "Presents? Maybe you'll get a lump of my premium coal collection!",
-            'snow': "Snow is cold, just like the hearts of those on the naughty list.",
-            'wish': "Wishes are for good kids! You've got some coal coming your way.",
+            'presents': "Presents? Maybe you'll get a lump of my premium coal collection!",
+            'reindeer': "My reindeer are busy delivering coal. Rudolph said you're next!",
             'cookies': "Cookies? Did you bake them with your bad attitude?",
-            'joy': "Joy? That’s a word for the nice list. Let's stick to your specialty: chaos.",
-            'holiday': "Holidays are for relaxing. But I'll be working overtime on coal delivery!"
+            'christmas': "Christmas? It's just another excuse for more work!",
+            'tree': "Christmas trees? Bah humbug! I’d rather sit in the dark!",
+            'elves': "My elves are exhausted from making all the coal for you naughty kids!",
+            'workshop': "The workshop is overflowing with coal orders. Guess who's responsible for that?",
+            'music': "Christmas music? Ugh, it's just noise to my ears.",
+            'family': "Family time? Better make amends before the big day!"
         };
 
         const niceDefaultResponses = [
             "Ho ho ho! That's interesting! Tell me more!",
             "Ho ho ho! Even Santa learns new things every day!",
-            "You're on the nice list with answers like that!"
+            "You're on the nice list with answers like that!",
+            "Christmas spirit is strong with you! Keep it up!"
         ];
 
         const naughtyDefaultResponses = [
             "*checks naughty list* That’s going in your permanent record!",
-            "*polishing my coal collection* You were saying something?"
+            "*polishing my coal collection* You were saying something?",
+            "You’re not making it easy to move to the nice list!",
+            "Well, well... another mark for the naughty list!"
         ];
 
         function selectSanta(type) {
             currentSanta = type;
-
+            document.body.style.backgroundColor = type === 'nice' ? '#2e7d32' : '#b71c1c';
             const greeting = type === 'nice'
                 ? "Ho ho ho! Nice Santa here! What would you like to talk about?"
                 : "Well, well... Naughty Santa at your service. What do you want?";
@@ -243,6 +131,12 @@
 
                 userInput.value = '';
             }
+        }
+
+        function suggestTopic(topic) {
+            const userInput = document.getElementById('userInput');
+            userInput.value = topic;
+            sendMessage();
         }
 
         document.getElementById('userInput').addEventListener('keypress', function(e) {
