@@ -126,44 +126,81 @@
         // Create snowflakes periodically
         setInterval(createSnowflake, 500);
 
-        const niceSantaResponses = {
-            'hello': "Ho ho ho! Merry Christmas! How are you today?",
-            'hi': "Ho ho ho! Hello there, dear friend!",
-            'present': "Ho ho ho! Have you been good this year? I'm checking my list twice!",
-            'gift': "My elves are working hard on making wonderful gifts!",
-            'tree': "Nothing brings joy like decorating the Christmas tree! The star on top is magical!",
-            'family': "Christmas is a wonderful time to be with family! It warms my heart to see families together!",
-            'snow': "The snow at the North Pole is magical - perfect for building snowmen!",
-            'wish': "Your Christmas wishes are important to me! I'll do my best to make them come true!",
-            'hot chocolate': "Mmm, hot chocolate! Mrs. Claus makes the best cocoa with marshmallows!",
-            'love': "Christmas is all about spreading love and joy. Keep shining your light!"
-        };
+const niceSantaResponses = {
+    'hello': "Ho ho ho! Merry Christmas! How are you today?",
+    'hi': "Ho ho ho! Hello there, dear friend!",
+    'present': "Ho ho ho! Have you been good this year? I'm checking my list twice!",
+    'gift': "My elves are working hard on making wonderful gifts!",
+    'tree': "Nothing brings joy like decorating the Christmas tree! The star on top is magical!",
+    'family': "Christmas is a wonderful time to be with family! It warms my heart to see families together!",
+    'snow': "The snow at the North Pole is magical - perfect for building snowmen!",
+    'wish': "Your Christmas wishes are important to me! I'll do my best to make them come true!",
+    'hot chocolate': "Mmm, hot chocolate! Mrs. Claus makes the best cocoa with marshmallows!",
+    'love': "Christmas is all about spreading love and joy. Keep shining your light!",
+    'music': "Ho ho ho! Christmas carols are playing all day at the North Pole. What's your favorite?",
+    'reindeer': "Rudolph and the gang are getting ready for the big night! They love carrots, by the way!",
+    'elves': "My elves are the hardest workers I know! They're making toys day and night!",
+    'sleigh': "My sleigh is getting polished for the big night. It's powered by Christmas magic!",
+    'north pole': "The North Pole is magical! It's always snowy, and the candy canes grow like trees!",
+    'cookies': "Ho ho ho! Cookies are my favorite! Especially when paired with a glass of milk!",
+    'mrs claus': "Mrs. Claus is baking cookies and knitting scarves for the elves!",
+    'joy': "Spreading joy is what Christmas is all about. You're doing a great job of it!",
+    'peace': "Peace on Earth is the best gift of all. Let's keep sharing kindness and smiles!",
+    'magic': "Christmas magic is everywhere, from twinkling lights to warm hugs. Can you feel it?",
+    'decorations': "Twinkling lights and shiny ornaments make everything feel like Christmas!",
+    'holiday': "The holiday season is all about giving and gratitude. What are you grateful for?"
+};
 
-        const naughtySantaResponses = {
-            'hello': "Well, well, well... if it isn't another visitor. *checks naughty list*",
-            'hi': "HAH! Coming to negotiate your way off the naughty list?",
-            'present': "Presents? Maybe you'll get a lump of my premium coal collection!",
-            'gift': "Gifts are for good children! Maybe you'll get a broken toy instead!",
-            'tree': "Christmas trees? Bah humbug! I’m more interested in tangled lights!",
-            'family': "Family? Sounds nice... too bad you're on the naughty list.",
-            'snow': "Snow is cold, just like the hearts of those on the naughty list.",
-            'wish': "Wishes are for good kids! You've got some coal coming your way.",
-            'hot chocolate': "Hot chocolate? I hope you didn’t burn it like you burn all your chances.",
-            'love': "Love is overrated. Let's talk about the naughty list instead."
-        };
+const naughtySantaResponses = {
+    'hello': "Well, well, well... if it isn't another visitor. *checks naughty list*",
+    'hi': "HAH! Coming to negotiate your way off the naughty list?",
+    'present': "Presents? Maybe you'll get a lump of my premium coal collection!",
+    'gift': "Gifts are for good children! Maybe you'll get a broken toy instead!",
+    'tree': "Christmas trees? Bah humbug! I’m more interested in tangled lights!",
+    'family': "Family? Sounds nice... too bad you're on the naughty list.",
+    'snow': "Snow is cold, just like the hearts of those on the naughty list.",
+    'wish': "Wishes are for good kids! You've got some coal coming your way.",
+    'hot chocolate': "Hot chocolate? I hope you didn’t burn it like you burn all your chances.",
+    'love': "Love is overrated. Let's talk about the naughty list instead.",
+    'music': "Christmas carols? More like screeching nightmares. Silent Night is my favorite... for obvious reasons.",
+    'reindeer': "The reindeer are busy delivering coal. Rudolph said you're next!",
+    'elves': "The elves are working overtime wrapping coal for you and your friends!",
+    'sleigh': "The sleigh is overloaded with coal. Guess who's responsible for that?",
+    'north pole': "The North Pole is a frozen wasteland. Just like your chances of making the nice list!",
+    'cookies': "Cookies? Did you bake them with your bad attitude?",
+    'mrs claus': "Mrs. Claus told me to give you another chance. But I ignored her advice!",
+    'joy': "Joy? That’s a word for the nice list. Let's stick to your specialty: chaos.",
+    'peace': "Peace and quiet sound nice. Too bad you're always causing trouble!",
+    'magic': "Magic won't save you this time. The naughty list is permanent, my friend.",
+    'decorations': "Decorations? More like a tangled mess of lights and broken ornaments!",
+    'holiday': "Holidays are for relaxing. But I'll be working overtime on coal delivery!"
+};
 
-        const niceDefaultResponses = [
-            "Ho ho ho! That's interesting! Tell me more!",
-            "Ho ho ho! Even Santa learns new things every day!",
-            "Ho ho ho! That makes me think of Christmas spirit!"
-        ];
+const niceDefaultResponses = [
+    "Ho ho ho! That's interesting! Tell me more!",
+    "Ho ho ho! Even Santa learns new things every day!",
+    "Ho ho ho! That makes me think of Christmas spirit!",
+    "What a delightful thought! Let's keep spreading cheer!",
+    "You're on the nice list with answers like that!",
+    "Ho ho ho! I love hearing your thoughts!",
+    "Christmas is better with friends like you. Tell me more!",
+    "What a heartwarming message! Thank you for sharing.",
+    "Your words make the North Pole brighter!",
+    "Ho ho ho! I can feel the Christmas magic in your words!"
+];
 
-        const naughtyDefaultResponses = [
-            "*checks naughty list* That’s going in your permanent record!",
-            "Ho ho NO! That's definitely not helping your naughty list status.",
-            "*polishing my coal collection* You were saying something?"
-        ];
-
+const naughtyDefaultResponses = [
+    "*checks naughty list* That’s going in your permanent record!",
+    "Ho ho NO! That's definitely not helping your naughty list status.",
+    "*polishing my coal collection* You were saying something?",
+    "Another point for the naughty list. Care to try again?",
+    "Your words are as messy as tangled lights!",
+    "Coal delivery confirmed. Anything else?",
+    "That attitude won't help your case. Keep talking.",
+    "Let me update your naughty list profile... done!",
+    "Your responses are making my coal pile grow bigger.",
+    "Don't worry, I’ve heard worse. But you're not helping yourself!"
+];
         function selectSanta(type) {
             currentSanta = type;
             document.getElementById('niceButton').classList.toggle('active', type === 'nice');
