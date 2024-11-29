@@ -3,17 +3,17 @@ body {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #2c2f33;
-    color: #ffffff;
+    background-color: #2c2f33; /* Dark background */
+    color: #ffffff; /* White text for visibility */
     overflow-x: hidden;
 }
 
 .snowflake {
     position: fixed;
     top: -10px;
-    color: #ffffff;
+    color: #ffffff; /* Bright white snowflakes */
     font-size: 20px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect */
     z-index: 1;
     pointer-events: none;
     animation: snowfall linear forwards;
@@ -26,7 +26,7 @@ body {
 }
 
 .chat-container {
-    background-color: #424549;
+    background-color: #424549; /* Dark gray background for the chat container */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -39,8 +39,8 @@ body {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #2c2f33;
-    color: #ffffff;
+    background-color: #2c2f33; /* Matches body background */
+    color: #ffffff; /* White text for messages */
 }
 
 .message {
@@ -50,7 +50,7 @@ body {
 }
 
 .user-message {
-    background-color: #7289da;
+    background-color: #7289da; /* Blue for user messages */
     text-align: right;
     margin-left: 20px;
     color: #ffffff;
@@ -71,8 +71,8 @@ input[type="text"] {
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #424549;
-    color: #ffffff;
+    background-color: #424549; /* Dark input box */
+    color: #ffffff; /* White text for input */
 }
 
 button {
@@ -87,16 +87,20 @@ button:hover {
     opacity: 0.9;
 }
 
-#niceButton.active {
-    background-color: #2e7d32; /* Green for Nice Santa Button */
+/* Static color for Nice Santa Button */
+#niceButton {
+    background-color: #2e7d32; /* Green for Nice Santa */
+    color: #ffffff;
 }
 
-#naughtyButton.active {
-    background-color: #b71c1c; /* Red for Naughty Santa Button */
+/* Static color for Naughty Santa Button */
+#naughtyButton {
+    background-color: #b71c1c; /* Red for Naughty Santa */
+    color: #ffffff;
 }
 
 h1 {
-    color: #ffffff;
+    color: #ffffff; /* White text for the title */
     text-align: center;
 }
 
@@ -108,3 +112,4 @@ h1 {
 .santa-selector button {
     margin: 0 10px;
 }
+
