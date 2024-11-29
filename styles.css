@@ -93,14 +93,20 @@ input[type="text"]::placeholder {
     color: #aaa;
 }
 
+/* Updated Button Styles */
 button {
     padding: 12px 25px;
-    color: white;
+    color: #ffffff;
     border: none;
     border-radius: 25px;
     cursor: pointer;
     font-size: 16px;
-    transition: opacity 0.3s;
+    background-color: #1f1f1f; /* Darker background for better contrast */
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #333333; /* Slightly lighter on hover */
 }
 
 #niceButton {
